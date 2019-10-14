@@ -1,0 +1,35 @@
+server:
+  port: 8071
+
+spring:
+  application:
+    name: msa_zuul
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+
+zuul:
+  routes:
+    msa_sercive1:
+      path: /sv1/**
+      url: http://localhost:8091
+    msa_service2:
+      path: /sv2/**
+      url: http://localhost:8092
+
+#\uBAA8\uB4E0\uC815\uBCF4\uB97C \uD3EC\uD568\uD558\uC5EC \uB178\uCD9C\uD568
+management:
+  endpoints:
+    web:
+      exposure:
+        include: -"*"
+
